@@ -5,7 +5,7 @@ def main():
     test = open( "test.arff" , "r" )
     out = open( "submit.csv" , "w+" )
     s = ''
-    while s != '=== Predictions on test set ===\n':
+    while not s.startswith('=== Predictions'):
         s = res.readline()
     s = ''
     while s != '@DATA\n':
@@ -17,9 +17,11 @@ def main():
     s = test.readline()
     out.write('urlid,label\n')
     while r != '\n':
-        a = r.split(':')
+        a = r.split(' ')
+        a = filter( lambda s: s != '', a )
+        a = a[2].split(':')
         pred = 0
-        if a[1][0] == '1':
+        if a[1] == '1':
             pred = 1
         a = s.split(',')
         _id = int(a[0])

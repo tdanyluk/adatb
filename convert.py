@@ -15,7 +15,7 @@ def parseLine(line):
 
 def main():
     if len(sys.argv) != 3:
-        print "usage: python tsv2arff.py input.tsv test={0,1}"
+        print "usage: python convert.py input.tsv test={0,1}"
         sys.exit(1)
     inFileName = sys.argv[1]
     test = sys.argv[2] == '1'
