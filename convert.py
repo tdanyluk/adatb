@@ -1,5 +1,19 @@
 import sys
 
+categs = [
+'recreation',
+'culture_politics',
+'science_technology',
+'arts_entertainment',
+'business',
+'computer_internet',
+'health',
+'gaming',
+'sports',
+'religion',
+'law_crime'
+]
+
 def isfloat(value):
   try:
     float(value)
@@ -46,6 +60,9 @@ def main():
     for i in range(0,N):
         if not i in [0,2,3]:
             outf.write('@ATTRIBUTE %s %s\n'%(attributeNames[i], attributeTypes[i]))
+        elif i == 3:
+            for c in categs:
+                outf.write('@ATTRIBUTE categ_%s {0,1}\n'%c)
     outf.write('@ATTRIBUTE label {0,1}\n')
     outf.write('@DATA\n')
     a = firstDataRow
@@ -58,6 +75,15 @@ def main():
                 outf.write(a[i])
                 if i != nCols-1:
                     outf.write(', ')
+            elif i == 3:
+                a[i] = a[i].strip("'")
+                for c in categs:
+                    if c == a[i]:
+                        outf.write('1, ')
+                    elif a[i] in categs:
+                        outf.write('0, ')
+                    else:
+                        outf.write('?, ')
         if test:
             outf.write(', ?')
         outf.write('\n')
