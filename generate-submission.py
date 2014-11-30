@@ -24,7 +24,8 @@ def main():
         if a[1] == '1':
             pred = 1
         a = s.split(',')
-        _id = int(a[0])
+        IdIndex = 1
+        _id = int(a[IdIndex])
         out.write("%s,%s\n"%(_id,pred))
         r = res.readline()
         s = test.readline()
