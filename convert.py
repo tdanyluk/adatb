@@ -22,6 +22,20 @@ inYearPattern = re.compile(r'(?:^|[^a-zA-Z])in ((?:19|20|21)[0-9]{2})(?=$|[^0-9]
 forYearPattern = re.compile(r'(?:^|[^a-zA-Z])for ((?:19|20|21)[0-9]{2})(?=$|[^0-9])', re.IGNORECASE)
 ofYearPattern = re.compile(r'(?:^|[^a-zA-Z])of ((?:19|20|21)[0-9]{2})(?=$|[^0-9])', re.IGNORECASE)
 
+words = [
+    'recipe',
+    'food',
+    'homemade',
+    'living',
+    'cookie',
+    'family',
+    'kitchen',
+    'baking',
+    'fashion',
+    'today',
+    'betting'
+    ]
+
 def isfloat(value):
   try:
     float(value)
@@ -72,6 +86,8 @@ def main():
             outf.write('@ATTRIBUTE title_year_in NUMERIC\n')
             outf.write('@ATTRIBUTE title_year_for NUMERIC\n')
             outf.write('@ATTRIBUTE title_year_of NUMERIC\n')
+            for w in words:
+                outf.write('@ATTRIBUTE title_word_%s NUMERIC\n'%w)
             pass
         elif i == 3:
             for c in categs:
@@ -98,11 +114,15 @@ def main():
                     title = data['title']
                 if title == None:
                     title = ''
+                title = title.lower()
                 year = yearPattern.findall(title)+['?']
                 inYear = inYearPattern.findall(title)+['?']
                 forYear = forYearPattern.findall(title)+['?']
                 ofYear = ofYearPattern.findall(title)+['?']
                 outf.write("%s, %s, %s, %s, " % (year[0],inYear[0], forYear[0], ofYear[0]))
+                for w in words:
+                    w = w.lower()
+                    outf.write('%d, '%title.count(w))
             elif i == 3:
                 for c in categs:
                     if c == a[i]:
