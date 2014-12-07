@@ -75,7 +75,9 @@ def main():
             pass
         elif i == 3:
             for c in categs:
-                outf.write('@ATTRIBUTE categ_%s {0,1}\n'%c)
+                outf.write('@ATTRIBUTE categ_%s NUMERIC\n'%c)
+        elif i == 4:
+            pass
         else:
             outf.write('@ATTRIBUTE %s %s\n'%(attributeNames[i], attributeTypes[i]))
     outf.write('@ATTRIBUTE label {0,1}\n')
@@ -104,11 +106,13 @@ def main():
             elif i == 3:
                 for c in categs:
                     if c == a[i]:
-                        outf.write('1, ')
+                        outf.write('%s, '%a[4])
                     elif a[i] in categs:
                         outf.write('0, ')
                     else:
                         outf.write('?, ')
+            elif i == 4:
+                pass
             else:
                 outf.write(a[i])
                 if i != nCols-1:
