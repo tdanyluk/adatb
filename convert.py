@@ -87,7 +87,7 @@ def main():
             outf.write('@ATTRIBUTE title_year_for NUMERIC\n')
             outf.write('@ATTRIBUTE title_year_of NUMERIC\n')
             for w in words:
-                outf.write('@ATTRIBUTE title_word_%s NUMERIC\n'%w)
+                outf.write('@ATTRIBUTE json_word_%s NUMERIC\n'%w)
             pass
         elif i == 3:
             for c in categs:
@@ -114,15 +114,15 @@ def main():
                     title = data['title']
                 if title == None:
                     title = ''
-                title = title.lower()
                 year = yearPattern.findall(title)+['?']
                 inYear = inYearPattern.findall(title)+['?']
                 forYear = forYearPattern.findall(title)+['?']
                 ofYear = ofYearPattern.findall(title)+['?']
                 outf.write("%s, %s, %s, %s, " % (year[0],inYear[0], forYear[0], ofYear[0]))
+                _json = a[i].lower()
                 for w in words:
                     w = w.lower()
-                    outf.write('%d, '%title.count(w))
+                    outf.write('%d, '%_json.count(w))
             elif i == 3:
                 for c in categs:
                     if c == a[i]:
