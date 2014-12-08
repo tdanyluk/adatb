@@ -23,6 +23,13 @@ forYearPattern = re.compile(r'(?:^|[^a-zA-Z])for ((?:19|20|21)[0-9]{2})(?=$|[^0-
 ofYearPattern = re.compile(r'(?:^|[^a-zA-Z])of ((?:19|20|21)[0-9]{2})(?=$|[^0-9])', re.IGNORECASE)
 
 words = [
+    'if',
+    '1',
+    'about',
+    'then',
+    'easy',
+    'hi',
+    'his',
     'recipe',
     'food',
     'homemade',
