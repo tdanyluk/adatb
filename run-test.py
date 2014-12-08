@@ -8,4 +8,4 @@ else:
     model = 'j48.model'
     if len(sys.argv) == 2:
         model = sys.argv[1]
-    os.system('java weka.classifiers.trees.J48 -l %s -T test.arff -p 0 > result.txt'%model)
+    os.system('java weka.classifiers.meta.AdaBoostM1 -l %s -T test.arff -p 0 > result.txt'%model)
